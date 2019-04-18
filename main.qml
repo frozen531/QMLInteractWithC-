@@ -41,6 +41,8 @@ ApplicationWindow {
             onClicked: {                    // 点击按钮发送数据到.text
                 inovkableLabel.text = interaction.getMyStringByInvokable();    // 使用 Q_INVOKABLE函数 函数名后面要加括号
                 slotsLabel.text = interaction.myString;             // 使用 slots函数 函数名后面没有括号
+// c++类中信号函数的调用
+interaction.labelDisplay()
             }
         }
 
@@ -61,10 +63,44 @@ ApplicationWindow {
                 interaction.setMyStringByInvokable("third")
             }
         }
+
+        Rectangle{
+            id: signalLight
+            height: 50
+            width: 300
+            color: "green"
+
+            Text {
+                id: text
+                text: qsTr("just begin")
+                anchors.centerIn: signalLight
+                font.pixelSize: 26;
+            }
+        }
     }
 
     InteractMemberVariable {               // 注册类
         id: interaction;
+// * 信号函数实现哪些响应设定 *****************************/
+onLabelDisplay: {
+    text.text = "m_string值显示"
+}
+
+onMyStringChanged:{
+    text.text = "按下按钮，m_string值改变"
+}
+/*****************************/
     }
+
+// 使用Connections可以实现上面注释符中相同的功能
+//    Connections{
+//        target: interaction
+//        onLabelDisplay: {
+//            text.text = "m_string值显示"
+//        }
+//        onMyStringChanged:{
+//            text.text = "按下按钮，m_string值改变"
+//        }
+//    }
 
 }
