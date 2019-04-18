@@ -2,13 +2,11 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 
-import myTest.interactMemberVariable 1.0
-
-ApplicationWindow {
+Item {
     visible: true
     width: 640
     height: 480
-    title: qsTr("暴露Qt C++的对象或类型给QML")
+//    title: qsTr("暴露Qt C++的对象或类型给QML")   // Item没有title属性
 
     Column{
         anchors.top: parent.top
@@ -39,8 +37,8 @@ ApplicationWindow {
             text: "display_m_string";
             height: 50
             onClicked: {                    // 点击按钮发送数据到.text
-                inovkableLabel.text = interaction.getMyStringByInvokable();    // 使用 Q_INVOKABLE函数 函数名后面要加括号
-                slotsLabel.text = interaction.myString;             // 使用 slots函数 函数名后面没有括号
+                inovkableLabel.text = interactMemberVariable.getMyStringByInvokable();    // 使用 Q_INVOKABLE函数 函数名后面要加括号  1#
+                slotsLabel.text = interactMemberVariable.myString;             // 使用 slots函数 函数名后面没有括号  1#
             }
         }
 
@@ -49,7 +47,7 @@ ApplicationWindow {
             text: "change_m_stringBySlots";
             height: 50
             onClicked: {                    // 点击按钮 改变m_string的值
-                interaction.setmyString("second")
+                interactMemberVariable.setmyString("second")                   // 1#
             }
         }
 
@@ -58,13 +56,8 @@ ApplicationWindow {
             text: "change_m_stringByInvokable";
             height: 50
             onClicked: {                    // 点击按钮 改变m_string的值
-                interaction.setMyStringByInvokable("third")
+                interactMemberVariable.setMyStringByInvokable("third")           // 1#
             }
         }
     }
-
-    InteractMemberVariable {               // 注册类
-        id: interaction;
-    }
-
 }
