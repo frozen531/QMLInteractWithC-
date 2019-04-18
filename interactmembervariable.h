@@ -20,7 +20,9 @@ public:
     Q_INVOKABLE void setMyStringByInvokable(QString aString); // 2# 可被qml直接调用的函数
 
 signals:
-    void myStringChanged();             // 1# myString值改变的信号函数
+    void myStringChanged();             // 1# myString值改变的信号函数，值改变触发的信号text.text = "按下按钮，m_string值改变"
+    void labelDisplay();              // 这个函数的功能是按钮显示m_string，触发text.text = "m_string值显示"
+
 
 public slots:  // 2# 可被qml直接调用的函数
     void setmyString(QString aString);  // 1# myString从qml传入 的槽函数

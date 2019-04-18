@@ -39,6 +39,8 @@ Item {
             onClicked: {                    // 点击按钮发送数据到.text
                 inovkableLabel.text = interactMemberVariable.getMyStringByInvokable();    // 使用 Q_INVOKABLE函数 函数名后面要加括号  1#
                 slotsLabel.text = interactMemberVariable.myString;             // 使用 slots函数 函数名后面没有括号  1#
+// 1#
+interactMemberVariable.labelDisplay()
             }
         }
 
@@ -59,5 +61,30 @@ Item {
                 interactMemberVariable.setMyStringByInvokable("third")           // 1#
             }
         }
+
+        Rectangle{
+                    id: signalLight
+                    height: 50
+                    width: 300
+                    color: "green"
+
+                    Text {
+                        id: text
+                        text: qsTr("just begin")
+                        anchors.centerIn: signalLight
+                        font.pixelSize: 26;
+                    }
+         }
     }
+
+// 2# 设置上下文属性信号函数用法
+Connections{
+    target: interactMemberVariable
+    onLabelDisplay: {
+        text.text = "m_string值显示"
+    }
+    onMyStringChanged:{
+        text.text = "按下按钮，m_string值改变"
+    }
+}
 }

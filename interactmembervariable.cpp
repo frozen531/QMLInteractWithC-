@@ -17,6 +17,7 @@ void InteractMemberVariable::setMyStringByInvokable(QString aString)
     {
         m_string = aString;
         qDebug() << "Q_INVOKABLE setmyString(QString aString)" << m_string;
+        emit myStringChanged();
     }
 }
 
@@ -26,6 +27,7 @@ void InteractMemberVariable::setmyString(QString aString)
     {
         m_string = aString;
         qDebug() << "slots setmyString(QString aString)" << m_string;
+        emit myStringChanged();
     }
 }
 
